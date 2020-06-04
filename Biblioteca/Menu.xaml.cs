@@ -10,6 +10,8 @@ namespace Biblioteca
         public Menu()
         {
             InitializeComponent();
+
+
         }
     }
 }

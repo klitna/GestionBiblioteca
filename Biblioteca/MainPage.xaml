@@ -1,7 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="Biblioteca.MainPage">
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
-    </StackLayout>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="Biblioteca.MainPage" BackgroundColor="#1E70A1">
+    <RelativeLayout TranslationX="0" BackgroundColor="#FAFBFF">
+        <Image Source="book.png" ScaleX="1" TranslationX="0" TranslationY="7" WidthRequest="-1" Margin="135,34,135,0" />
+        <Label Text="Gestión Biblioteca" HorizontalOptions="Center" VerticalOptions="Center" Margin="148,200,0,-1" FontAttributes="Bold" Scale="2" VerticalTextAlignment="Center" />
+        <Entry x:Name="entryName" Placeholder="Username" AbsoluteLayout.LayoutBounds="10,100,1,1" Margin="150,350,0,0" HorizontalTextAlignment="Center" HorizontalOptions="Center" />
+        <Entry x:Name="entryPass" Placeholder="Password" AutomationProperties.IsInAccessibleTree="False" Keyboard="Plain" Margin="150,400,50,-5" HorizontalOptions="Fill" HorizontalTextAlignment="Start" VerticalTextAlignment="Start" WidthRequest="-1" VerticalOptions="Center" />
+        <Button x:Name="btnLogIn" Clicked="Button_Clicked" Text="Log In" AnchorY="0.5" BackgroundColor="#1E4057" FontAttributes="Bold" AutomationProperties.IsInAccessibleTree="False" BorderColor="#FFFFFF" Margin="150,464,0,165" TextColor="#FFFFFF" InputTransparent="False" WidthRequest="-1" Scale="1" ScaleY="1" RotationX="0" ScaleX="1" AnchorX="0.5" Padding="0" AutomationId="btnLogIn"/>
+    </RelativeLayout>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+" Activated="ToolbarItem_Activated" />
+    </ContentPage.ToolbarItems>
 </ContentPage>
+

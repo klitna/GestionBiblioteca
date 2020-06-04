@@ -17,5 +17,16 @@ namespace Biblioteca
         {
             InitializeComponent();
         }
+
+        void Button_Clicked(System.Object sender, System.EventArgs e)
+        {
+            string username = entryName.Text;
+            string password = entryPass.Text;
+        }
+
+        void ToolbarItem_Activated(System.Object sender, System.EventArgs e)
+        {
+            Navigation.PushAsync(new Menu());
+        }
     }
 }
