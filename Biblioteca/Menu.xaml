@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Biblioteca.Menu">
-    <FlexLayout>
-        <ImageButton x:Name="btnCatalog"
-                     Margin="150,200,150,300"
-                     Source="catalog.png"
-                     />
+    <FlexLayout BackgroundColor="#FFFFFF" Scale="1">
+        <Image Source="logo.jpeg"
+               Aspect="AspectFit" Margin="0,-500,0,0" 
+               />
+        
     </FlexLayout>
 </ContentPage>
