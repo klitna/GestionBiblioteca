@@ -11,5 +11,11 @@ namespace Biblioteca
         {
             InitializeComponent();
         }
+
+        void ImageButton_Clicked(System.Object sender, System.EventArgs e)
+        {
+            Navigation.PushAsync(new Catalog());
+        }
+
     }
 }

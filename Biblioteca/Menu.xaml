@@ -1,9 +1,22 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Biblioteca.Menu">
-    <FlexLayout BackgroundColor="#FFFFFF" Scale="1">
+    <AbsoluteLayout BackgroundColor="#FFFFFF" Scale="1" Margin="0,-4,0,0" Padding="0" AnchorX="0.5">
+
+   
         <Image Source="logo.jpeg"
-               Aspect="AspectFit" Margin="0,-500,0,0" 
+               Aspect="AspectFit"
+
                />
-        
-    </FlexLayout>
+
+        <ImageButton
+            AbsoluteLayout.LayoutFlags="PositionProportional" 
+            Source="catalog.png"
+            Margin="17,204,295,0" BackgroundColor="#FFFFFF"
+            Clicked="ImageButton_Clicked"
+            />
+       
+        <Label Text="Ver el catálogo" Margin="119,225,0,0"
+               FontSize="Large" FontAttributes="Bold"
+               />
+    </AbsoluteLayout>
 </ContentPage>
