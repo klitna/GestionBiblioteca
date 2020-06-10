@@ -33,8 +33,8 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <ListView x:Name="listBooks">
-
+            <ListView x:Name="listBooks" ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}">
+     
 
             </ListView>
 

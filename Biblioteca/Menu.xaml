@@ -23,6 +23,7 @@
             BackgroundColor="#FFFFFF"
             Clicked="ImageButton_Clicked"
             />
+        <Label Text=""/>
        
         <Label
             Grid.Column="0"
