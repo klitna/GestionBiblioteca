@@ -1,22 +1,52 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Biblioteca.Menu">
-    <AbsoluteLayout BackgroundColor="#FFFFFF" Scale="1" Margin="0,-4,0,0" Padding="0" AnchorX="0.5">
+    <Grid BackgroundColor="#FFFFFF" Scale="1" Margin="0,-4,0,0" Padding="0" AnchorX="0.5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-   
-        <Image Source="logo.jpeg"
-               Aspect="AspectFit"
+        <Image
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="4"
+            Source="logo.jpeg"
+            Aspect="AspectFit"
 
                />
 
         <ImageButton
+            x:Name="btnView"
+            Grid.Row="1"
+            Grid.Column="0"
             AbsoluteLayout.LayoutFlags="PositionProportional" 
             Source="catalog.png"
-            Margin="17,204,295,0" BackgroundColor="#FFFFFF"
+            BackgroundColor="#FFFFFF"
             Clicked="ImageButton_Clicked"
             />
        
-        <Label Text="Ver el catálogo" Margin="119,225,0,0"
+        <Label
+            Grid.Column="0"
+            Grid.Row="2"
+            Text="Ver el catálogo" Margin="119,225,0,0"
                FontSize="Large" FontAttributes="Bold"
                />
-    </AbsoluteLayout>
+        <ImageButton
+            x:Name="btnPresstar"
+            Grid.Row="1"
+            Grid.Column="2"
+            AbsoluteLayout.LayoutFlags="PositionProportional" 
+            Source="book.png"
+            BackgroundColor="#FFFFFF"
+            Clicked="ImageButton_Clicked"
+            />
+       
+        <Label
+            Grid.Column="2"
+            Grid.Row="2"
+            Text="Ver el catálogo" Margin="119,225,0,0"
+               FontSize="Large" FontAttributes="Bold"
+               />
+
+
+    </Grid>
 </ContentPage>
