@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Biblioteca{
@@ -15,7 +16,7 @@ namespace Biblioteca{
             availiable = false;
         }
 
-        public Book(string title, string author, string genre) { this.title = title; this.author = author; this.genre = genre; }
+        public Book(string title, string author, string genre) { this.title = title; this.author = author; this.genre = genre; availiable = true; }
 
         public string title { set; get; }
         public string author { set; get; }
@@ -25,13 +26,46 @@ namespace Biblioteca{
 
     public partial class Catalog : ContentPage
     {
+        public string SelectedBook{ get; set; }
+        public ICommand BorrowBookCommand => new Command (BorrowBook);
+        ObservableCollection<string> itemList;
+        public int indexSelectedBook;
+        const int BOOKS_AMOUNT = 20;
+
+        Book[] b = new Book[BOOKS_AMOUNT];
+
+        public ObservableCollection<string> printList(Book[] b, int size)
+        {
+            ObservableCollection<string> itemList;
+            itemList = new ObservableCollection<string>();
+            string avail;
+            for (int i = 0; i < size; i++)
+            {
+                if (b[i].availiable)
+                    avail = "Disponible";
+                else
+                    avail = "No disponible";
+
+                itemList.Add(b[i].title + "\t - \t" + b[i].author + "\t - \t" + b[i].genre+"\t - \t "+avail);
+            }
+            return itemList;
+        }
+
+        public void BorrowBook()
+        {
+            int index = itemList.IndexOf(SelectedBook);
+            b[index].availiable = false;
+            Console.WriteLine("Av: "+b[index].availiable);
+            printList(b, BOOKS_AMOUNT);
+            InitializeComponent();
+
+        }
+
         public Catalog()
         {
-            const int BOOKS_AMOUNT = 20;
 
             InitializeComponent();
 
-            Book[] b= new Book[BOOKS_AMOUNT];
             b[0] = new Book("Guerra y Paz", "L. Tolstoy", "Drama");
             b[1] = new Book("De la Tierra a la Luna", "J. Verne", "Aventura");
             b[2] = new Book("Colección de Cuentos", "A. Chekhov", "Humor");
@@ -53,21 +87,12 @@ namespace Biblioteca{
             b[18] = new Book("Don Quijote de la Mancha", "M. de Cervantes", "Satira");
             b[19] = new Book("Sueñan los androides con ovejas eléctricas", "F. Dick", "Ciencia ficción");
 
-            ObservableCollection<string> itemList;
-            itemList = new ObservableCollection<string>();
-
-
-            for (int i = 0; i < BOOKS_AMOUNT; i++)
-            {
-                Console.WriteLine("\n\n\n\n"+ i + " " + b[i].title+ "\n\n\n\n ");
-                itemList.Add(b[i].title + "\t - \t" + b[i].author + "\t - \t" + b[i].genre);
-            }
-            listBooks.ItemsSource = itemList;
-
-
-
+            Console.WriteLine(indexSelectedBook);
+            listBooks.ItemsSource = printList(b, BOOKS_AMOUNT);
 
 
         }
+
+        
     }
 }

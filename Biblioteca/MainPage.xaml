@@ -1,29 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="Biblioteca.MainPage" BackgroundColor="#FAFBFF" Padding="0,0,0,38">
-    <Grid BackgroundColor="#FAFBFF">
-        <Grid.RowDefinitions>
-               <RowDefinition Height="Auto"/>
-               <RowDefinition Height="Auto"/>
-        <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-           </Grid.ColumnDefinitions>
+    <StackLayout BackgroundColor="#FAFBFF">
+       
          <Image Source="book.png"
-                Grid.Row="0"
-                Grid.RowSpan="3"
-                Grid.ColumnSpan="3"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-               Grid.Column="0" AnchorX="0.5"
+                
+                
+                Scale="0.4" VerticalOptions="Start"
                
 
                />
-        <Label Text="Gestión Biblioteca" HorizontalOptions="Center" VerticalOptions="Center" Margin="150,200,0,-1" FontAttributes="Bold" Scale="2" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" LineBreakMode="WordWrap" TabIndex="0" />
-        <Entry x:Name="entryName" Placeholder="Username" AbsoluteLayout.LayoutBounds="10,100,1,1" Margin="150,350,0,0" HorizontalTextAlignment="Center" HorizontalOptions="Center" />
-        <Entry x:Name="entryPass" Placeholder="Password" AutomationProperties.IsInAccessibleTree="False" Keyboard="Plain" Margin="150,400,50,-5" HorizontalOptions="Fill" HorizontalTextAlignment="Start" VerticalTextAlignment="Start" WidthRequest="-1" VerticalOptions="Center" />
-        <Button x:Name="btnLogIn" Clicked="btnLogIn_Clicked" Text="Log In" AnchorY="0.5" BackgroundColor="#326384" FontAttributes="Bold" AutomationProperties.IsInAccessibleTree="False" BorderColor="#FFFFFF" Margin="150,464,0,165" TextColor="#FFFFFF" InputTransparent="False" WidthRequest="-1" Scale="1" ScaleY="1" RotationX="0" ScaleX="1" AnchorX="0.5" Padding="0" AutomationId="btnLogIn" CornerRadius="-1" HeightRequest="39" HorizontalOptions="CenterAndExpand"/>
-    </Grid>
+        <Label
+            TextColor="Black"
+            Text="Gestión Biblioteca"
+            FontAttributes="Bold"
+            FontSize="Large"
+            Scale="1.5" HorizontalTextAlignment="Center" LineHeight="-1" VerticalTextAlignment="Center"
+            VerticalOptions="Center"
+            HorizontalOptions="Center" Margin="0,-71,0,34"
+
+
+
+               />
+        <Entry
+            x:Name="entryName"
+            Placeholder="Username"
+            Grid.Column="1" Margin="20,0"
+
+            />
+        <Entry
+            x:Name="entryPass"
+            Placeholder="Password" Margin="20,0"
+            />
+
+        <Button x:Name="btnLogIn"
+                TextColor="White"
+                Clicked="btnLogIn_Clicked"
+                Text="Log In"
+
+                BackgroundColor="#326384"
+                FontAttributes="Bold"
+                AutomationProperties.IsInAccessibleTree="False"
+                BorderColor="#FFFFFF" Margin="60,0"
+      />
+    </StackLayout>
 </ContentPage>
 
