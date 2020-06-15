@@ -4,27 +4,6 @@ using System.Collections.ObjectModel;
 using Xamarin.Forms;
 
 namespace Biblioteca{
-
-    public class Book
-    {
-        public Book()
-        {
-            title = "Unknown";
-            author = "Unknown";
-            genre = "Unknown";
-            availiable = false;
-        }
-
-        public Book(string title, string author, string genre) { this.title = title; this.author = author; this.genre = genre; availiable = true; }
-
-        public string title { set; get; }
-        public string author { set; get; }
-        public string genre { set; get; }
-        public bool availiable { set; get; }
-
-       
-    }
-
     public partial class Catalog : ContentPage
     {
         public string SelectedBook{ get; set; }
@@ -35,18 +14,18 @@ namespace Biblioteca{
 
         Book[] b = new Book[BOOKS_AMOUNT];
 
-        public ObservableCollection<string> printList(Book[] b, int size)
+        public ObservableCollection<string> PrintList(Book[] b, int size)
         {
             Books = new ObservableCollection<string>();
             string avail;
             for (int i = 0; i < size; i++)
             {
-                if (b[i].availiable)
+                if (b[i].Availiable)
                     avail = "Disponible";
                 else
                     avail = "No disponible";
 
-                Books.Add(b[i].title + "\t - \t" + b[i].author + "\t - \t" + b[i].genre+"\t - \t "+avail);
+                Books.Add(b[i].Title + "\t - \t" + b[i].Author + "\t - \t" + b[i].Genre+"\t - \t "+avail);
             }
             return Books;
         }
@@ -54,9 +33,9 @@ namespace Biblioteca{
         public void BorrowBook()
         {
             int index = Books.IndexOf(SelectedBook);
-            b[index].availiable = false;
-            Console.WriteLine("Av: "+b[index].availiable);
-            printList(b, BOOKS_AMOUNT);
+            b[index].Availiable = false;
+            Console.WriteLine("Av: "+b[index].Availiable);
+            PrintList(b, BOOKS_AMOUNT);
             InitializeComponent();
 
         }
@@ -65,6 +44,8 @@ namespace Biblioteca{
         {
 
             InitializeComponent();
+            
+            BorrowBookButton.Command = BorrowBookCommand; 
 
             b[0] = new Book("Guerra y Paz", "L. Tolstoy", "Drama");
             b[1] = new Book("De la Tierra a la Luna", "J. Verne", "Aventura");
@@ -88,7 +69,7 @@ namespace Biblioteca{
             b[19] = new Book("Sueñan los androides con ovejas eléctricas", "F. Dick", "Ciencia ficción");
 
             Console.WriteLine(indexSelectedBook);
-            listBooks.ItemsSource = printList(b, BOOKS_AMOUNT);
+            listBooks.ItemsSource = PrintList(b, BOOKS_AMOUNT);
 
 
         }

@@ -8,6 +8,7 @@
 
             </ListView>
             <Button
+                x:Name="BorrowBookButton"
                 BackgroundColor="#5E8EA8"
                 TextColor="White"
                 Text="Prestar libro"
