@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Biblioteca{
@@ -22,13 +21,15 @@ namespace Biblioteca{
         public string author { set; get; }
         public string genre { set; get; }
         public bool availiable { set; get; }
+
+       
     }
 
     public partial class Catalog : ContentPage
     {
         public string SelectedBook{ get; set; }
-        public ICommand BorrowBookCommand => new Command (BorrowBook);
-        ObservableCollection<string> itemList;
+        public System.Windows.Input.ICommand BorrowBookCommand => new Command(BorrowBook);
+        ObservableCollection<string> Books { get; set; }
         public int indexSelectedBook;
         const int BOOKS_AMOUNT = 20;
 
@@ -36,8 +37,7 @@ namespace Biblioteca{
 
         public ObservableCollection<string> printList(Book[] b, int size)
         {
-            ObservableCollection<string> itemList;
-            itemList = new ObservableCollection<string>();
+            Books = new ObservableCollection<string>();
             string avail;
             for (int i = 0; i < size; i++)
             {
@@ -46,14 +46,14 @@ namespace Biblioteca{
                 else
                     avail = "No disponible";
 
-                itemList.Add(b[i].title + "\t - \t" + b[i].author + "\t - \t" + b[i].genre+"\t - \t "+avail);
+                Books.Add(b[i].title + "\t - \t" + b[i].author + "\t - \t" + b[i].genre+"\t - \t "+avail);
             }
-            return itemList;
+            return Books;
         }
 
         public void BorrowBook()
         {
-            int index = itemList.IndexOf(SelectedBook);
+            int index = Books.IndexOf(SelectedBook);
             b[index].availiable = false;
             Console.WriteLine("Av: "+b[index].availiable);
             printList(b, BOOKS_AMOUNT);
