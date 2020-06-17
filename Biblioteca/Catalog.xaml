@@ -3,7 +3,7 @@
     <ContentPage.Content>
         <StackLayout>
 
-            <ListView x:Name="listBooks" ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}">
+            <ListView x:Name="BookList" ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}">
      
 
             </ListView>

@@ -9,7 +9,6 @@ namespace Biblioteca{
         public string SelectedBook{ get; set; }
         public System.Windows.Input.ICommand BorrowBookCommand => new Command(BorrowBook);
         ObservableCollection<string> Books { get; set; }
-        public int indexSelectedBook;
         const int BOOKS_AMOUNT = 20;
 
         Book[] b = new Book[BOOKS_AMOUNT];
@@ -29,51 +28,54 @@ namespace Biblioteca{
             }
             return Books;
         }
+        
 
         public void BorrowBook()
         {
+            //BookList.SelectedItem = SelectedBook;
+            //(Book)BookList.SelectedItem
+            //int index = Books.IndexOf(SelectedBook);
+            //int index = x.IndexOf(SelectedBook);
             int index = Books.IndexOf(SelectedBook);
-            b[index].Availiable = false;
-            Console.WriteLine("Av: "+b[index].Availiable);
-            PrintList(b, BOOKS_AMOUNT);
-            InitializeComponent();
-
+            Book x = (Book)BookList.SelectedItem;
+            Console.Write("index: " + index);
+            b[0].Availiable = false;
+            Console.WriteLine("Av: "+b[index+1].Availiable);
+            DisplayAlert("Index: ", Convert.ToString(index)+" "+x.Title, "OK");
+            BookList.ItemsSource=PrintList(b, BOOKS_AMOUNT);
         }
 
         public Catalog()
         {
-
             InitializeComponent();
             
-            BorrowBookButton.Command = BorrowBookCommand; 
+            BorrowBookButton.Command = BorrowBookCommand;
 
-            b[0] = new Book("Guerra y Paz", "L. Tolstoy", "Drama");
-            b[1] = new Book("De la Tierra a la Luna", "J. Verne", "Aventura");
-            b[2] = new Book("Colección de Cuentos", "A. Chekhov", "Humor");
-            b[3] = new Book("Faust", "Ghoete", "Tragedia");
-            b[4] = new Book("Pobres Gentes", "F. Dostoyevsky", "Drama");
-            b[5] = new Book("1984", "G. Orwell", "Ciencia ficción");
-            b[6] = new Book("Tres camaradas", "Erich Maria Remarque", "Ficción");
-            b[7] = new Book("La Rayuela", "J. Cortázar", "Ficción");
-            b[8] = new Book("Don Quijote de la Mancha", "M. de Cervantes", "Satira");
-            b[9] = new Book("Sueñan los androides con ovejas eléctricas", "F. Dick", "Ciencia ficción");
-            b[10] = new Book("Guerra y Paz", "L. Tolstoy", "Drama");
-            b[11] = new Book("De la Tierra a la Luna", "J. Verne", "Aventura");
-            b[12] = new Book("Colección de Cuentos", "A. Chekhov", "Humor");
-            b[13] = new Book("Faust", "Ghoete", "Tragedia");
-            b[14] = new Book("Pobres Gentes", "F. Dostoyevsky", "Drama");
-            b[15] = new Book("1984", "G. Orwell", "Ciencia ficción");
-            b[16] = new Book("Tres camaradas", "Erich Maria Remarque", "Ficción");
-            b[17] = new Book("La Rayuela", "J. Cortázar", "Ficción");
-            b[18] = new Book("Don Quijote de la Mancha", "M. de Cervantes", "Satira");
-            b[19] = new Book("Sueñan los androides con ovejas eléctricas", "F. Dick", "Ciencia ficción");
+            b[0] = new Book("Guerra y Paz", "L. Tolstoy", "Drama", 0);
+            b[1] = new Book("De la Tierra a la Luna", "J. Verne", "Aventura", 1);
+            b[2] = new Book("Colección de Cuentos", "A. Chekhov", "Humor", 2);
+            b[3] = new Book("Faust", "Ghoete", "Tragedia", 3);
+            b[4] = new Book("Pobres Gentes", "F. Dostoyevsky", "Drama", 4);
+            b[5] = new Book("1984", "G. Orwell", "Ciencia ficción", 5);
+            b[6] = new Book("Tres camaradas", "Erich Maria Remarque", "Ficción", 6);
+            b[7] = new Book("La Rayuela", "J. Cortázar", "Ficción", 7);
+            b[8] = new Book("Don Quijote de la Mancha", "M. de Cervantes", "Satira", 8);
+            b[9] = new Book("Sueñan los androides con ovejas eléctricas", "F. Dick", "Ciencia ficción", 9);
+            b[10] = new Book("Guerra y Paz", "L. Tolstoy", "Drama",10);
+            b[11] = new Book("De la Tierra a la Luna", "J. Verne", "Aventura",11);
+            b[12] = new Book("Colección de Cuentos", "A. Chekhov", "Humor",12);
+            b[13] = new Book("Faust", "Ghoete", "Tragedia",13);
+            b[14] = new Book("Pobres Gentes", "F. Dostoyevsky", "Drama",14);
+            b[15] = new Book("1984", "G. Orwell", "Ciencia ficción",15);
+            b[16] = new Book("Tres camaradas", "Erich Maria Remarque", "Ficción",16);
+            b[17] = new Book("La Rayuela", "J. Cortázar", "Ficción",17);
+            b[18] = new Book("Don Quijote de la Mancha", "M. de Cervantes", "Satira",18);
+            b[19] = new Book("Sueñan los androides con ovejas eléctricas", "F. Dick", "Ciencia ficción",19);
 
-            Console.WriteLine(indexSelectedBook);
-            listBooks.ItemsSource = PrintList(b, BOOKS_AMOUNT);
+            //BookList.ItemsSource = Books.Select((item) => new ItemWrapper()
 
+            BookList.ItemsSource = PrintList(b, BOOKS_AMOUNT);
 
         }
-
-        
     }
 }
