@@ -35,13 +35,11 @@ namespace Biblioteca{
             //BookList.SelectedItem = SelectedBook;
             //(Book)BookList.SelectedItem
             //int index = Books.IndexOf(SelectedBook);
-            //int index = x.IndexOf(SelectedBook);
             int index = Books.IndexOf(SelectedBook);
-            Book x = (Book)BookList.SelectedItem;
             Console.Write("index: " + index);
             b[0].Availiable = false;
             Console.WriteLine("Av: "+b[index+1].Availiable);
-            DisplayAlert("Index: ", Convert.ToString(index)+" "+x.Title, "OK");
+            DisplayAlert("Index: ", Convert.ToString(index), "OK");
             BookList.ItemsSource=PrintList(b, BOOKS_AMOUNT);
         }
 
@@ -50,6 +48,7 @@ namespace Biblioteca{
             InitializeComponent();
             
             BorrowBookButton.Command = BorrowBookCommand;
+            Book x = (Book)BookList.SelectedItem;
 
             b[0] = new Book("Guerra y Paz", "L. Tolstoy", "Drama", 0);
             b[1] = new Book("De la Tierra a la Luna", "J. Verne", "Aventura", 1);
