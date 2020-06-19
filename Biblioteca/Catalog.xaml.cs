@@ -10,7 +10,10 @@ namespace Biblioteca{
         public System.Windows.Input.ICommand BorrowBookCommand => new Command(BorrowBook);
         ObservableCollection<string> Books { get; set; }
         const int BOOKS_AMOUNT = 20;
-
+        List<User> user = new List<User>();
+        /*list.Add(new Student("bob"));
+        list.Add(new Student("joe"));
+        Student joe = list[1];*/
         Book[] b = new Book[BOOKS_AMOUNT];
 
         public ObservableCollection<string> PrintList(Book[] b, int size)
@@ -32,7 +35,7 @@ namespace Biblioteca{
 
         public void BorrowBook()
         {
-            //BookList.SelectedItem = SelectedBook;
+            BookList.SelectedItem = SelectedBook;
             //(Book)BookList.SelectedItem
             //int index = Books.IndexOf(SelectedBook);
             int index = Books.IndexOf(SelectedBook);
@@ -46,7 +49,7 @@ namespace Biblioteca{
         public Catalog()
         {
             InitializeComponent();
-            
+             
             BorrowBookButton.Command = BorrowBookCommand;
             Book x = (Book)BookList.SelectedItem;
 
