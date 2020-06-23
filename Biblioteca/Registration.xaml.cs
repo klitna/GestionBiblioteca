@@ -26,7 +26,7 @@ namespace Biblioteca
 
         public MyPage()
         {
-            InitializeComponent();
+            //InitializeComponent();
         }
     }
 }

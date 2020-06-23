@@ -9,9 +9,7 @@ namespace Biblioteca
         // to call an async method from the constructor while
         // communicating intent to fire and forget, and allow
         // handling of exceptions
-        public static async void SafeFireAndForget(this Task task,
-            bool returnToCallingContext,
-            Action<Exception> onException = null)
+        public static async void SafeFireAndForget(this Task task,bool returnToCallingContext, Action<Exception> onException = null)
         {
             try
             {
