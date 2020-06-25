@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using SQLite;
@@ -16,7 +17,13 @@ namespace Biblioteca
         static bool initialized = false;
         readonly SQLiteAsyncConnection _database;
 
+        public TodoItemDatabase()
+        {
+            Database.CreateTableAsync<Book>();
+            Database.CreateTableAsync<User>();
+        }
 
+        //Guardar usuario
         public Task<int> SaveUserAsync(User usr)
         {
             if (usr.Username != null)
@@ -29,10 +36,13 @@ namespace Biblioteca
             }
         }
 
-        public TodoItemDatabase()
+        //Devolver la lista de libros
+        public Task<List<Book>> GetBooksAsync()
         {
-            //InitializeAsync().SafeFireAndForget(false);
+            return _database.Table<Book>().ToListAsync();
         }
+
+        
 
         async Task InitializeAsync()
         {

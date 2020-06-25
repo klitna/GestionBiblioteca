@@ -10,6 +10,8 @@ namespace Biblioteca
     {
         public System.Windows.Input.ICommand RegisterCommand => new Command(Register);
 
+        public Color Red { get; private set; }
+
         public void Register()
         {
             //Comprobar en bd que no exista el login
@@ -22,6 +24,27 @@ namespace Biblioteca
                     await Navigation.PopAsync();
                 };
              */
+            if(newPassword.Text!=repeatPassword.Text)
+            {
+                newPassword.TextColor = Red;
+                repeatPassword.TextColor = Red;
+
+            }
+            else
+            {
+                User usr=new User();
+                usr.Username = newUsername.Text;
+                usr.Password = newPassword.Text;
+                SaveUserAsync(usr);
+            }
+
+
+
+        }
+
+        private void SaveUserAsync(User usr)
+        {
+            throw new NotImplementedException();
         }
 
         public MyPage()

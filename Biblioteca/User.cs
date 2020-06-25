@@ -10,8 +10,9 @@ namespace Biblioteca
         {
         }
 
-        public string Username;
-        public string Password;
-        public Book[] book;
+        [PrimaryKey]
+        public string Username { set; get; }
+        public string Password { set; get; }
+        public Book[] book { set; get; }
     }
 }
