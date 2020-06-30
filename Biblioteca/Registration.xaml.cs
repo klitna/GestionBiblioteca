@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using Xamarin.Forms;
 
 namespace Biblioteca
@@ -8,22 +7,13 @@ namespace Biblioteca
     public partial class MyPage : ContentPage
 
     {
-        public System.Windows.Input.ICommand RegisterCommand => new Command(Register);
+        public System.Windows.Input.ICommand RegisterCommand => new Command(RegisterAsync);
 
         public Color Red { get; private set; }
 
-        public void Register()
+        public void RegisterAsync()
         {
-            //Comprobar en bd que no exista el login
-            /*
-             * var saveButton = new Button { Text = "Save" };
-                saveButton.Clicked += async (sender, e) =>
-                {
-                    var todoItem = (TodoItem)BindingContext;
-                    await App.Database.SaveItemAsync(todoItem);
-                    await Navigation.PopAsync();
-                };
-             */
+          
             if(newPassword.Text!=repeatPassword.Text)
             {
                 newPassword.TextColor = Red;
@@ -35,18 +25,18 @@ namespace Biblioteca
                 User usr=new User();
                 usr.Username = newUsername.Text;
                 usr.Password = newPassword.Text;
-                SaveUserAsync(usr);
+                //await SaveUserAsync(usr);
+                using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
+                {
+
+                }
+
+                
             }
 
-
-
         }
 
-        private void SaveUserAsync(User usr)
-        {
-            throw new NotImplementedException();
-        }
-
+       
         public MyPage()
         {
             //InitializeComponent();
