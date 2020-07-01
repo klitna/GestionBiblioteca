@@ -7,6 +7,7 @@ namespace Biblioteca
     public partial class App : Application
     {
         static TodoItemDatabase database;
+        public static string FilePath;
 
         public static TodoItemDatabase Database
         {
@@ -14,7 +15,7 @@ namespace Biblioteca
             {
                 if (database == null)
                 {
-                    database = new TodoItemDatabase (Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Notes.db3"));
+                    database = new TodoItemDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Notes.db3"));
                 }
                 return database;
             }

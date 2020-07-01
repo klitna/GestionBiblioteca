@@ -28,7 +28,7 @@ namespace Biblioteca
                 //await SaveUserAsync(usr);
                 using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
                 {
-
+                    int userAdded = conn.Insert(usr);
                 }
 
                 

@@ -17,7 +17,7 @@ namespace Biblioteca
         static bool initialized = false;
         readonly SQLiteAsyncConnection _database;
 
-        public TodoItemDatabase()
+        public TodoItemDatabase(string dbname)
         {
             Database.CreateTableAsync<Book>();
             Database.CreateTableAsync<User>();
@@ -42,7 +42,11 @@ namespace Biblioteca
             return _database.Table<Book>().ToListAsync();
         }
 
-        
+
+        public Task<string>GetUsernameAsync()
+        {
+           // return _database.Table<User>().Username;
+        }
 
         async Task InitializeAsync()
         {

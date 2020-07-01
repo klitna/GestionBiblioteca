@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using SQLite;
 using Xamarin.Forms;
 
 namespace Biblioteca{
@@ -15,6 +16,16 @@ namespace Biblioteca{
         list.Add(new Student("joe"));
         Student joe = list[1];*/
         Book[] b = new Book[BOOKS_AMOUNT];
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
+            {
+                conn.CreateTable<User>();
+                var bookBd = conn.Table<User>().ToList();
+            }
+        }
 
         public ObservableCollection<string> PrintList(Book[] b, int size)
         {
