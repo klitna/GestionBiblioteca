@@ -30,7 +30,6 @@ namespace Biblioteca
                 {
                     int userAdded = conn.Insert(usr);
                 }
-
                 
             }
 
@@ -39,7 +38,8 @@ namespace Biblioteca
        
         public MyPage()
         {
-            //InitializeComponent();
+            InitializeComponent();
+            Guardar.Command = RegisterCommand;
         }
     }
 }

@@ -43,10 +43,10 @@ namespace Biblioteca
         }
 
 
-        public Task<string>GetUsernameAsync()
+        /*public Task<string>GetUsernameAsync()
         {
-           // return _database.Table<User>().Username;
-        }
+            return _database.Table<User>().ToListAsync();
+        }*/
 
         async Task InitializeAsync()
         {
