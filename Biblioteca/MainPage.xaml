@@ -42,7 +42,14 @@
                 FontAttributes="Bold"
                 AutomationProperties.IsInAccessibleTree="False"
                 BorderColor="#FFFFFF" Margin="60,0"
-      />
+                />
+        <Label x:Name="createAccount"
+               Text="Crear nuevo usuario"
+               HorizontalOptions="Center"
+               <Label.GestureRecognizers>
+        <TapGestureRecognizer Command="{Binding MyCommand}" NumberOfTapsRequired="1" />
+      </Label.GestureRecognizers>
+
     </StackLayout>
 </ContentPage>
 

@@ -21,7 +21,6 @@ namespace Biblioteca
             {
                 newPassword.TextColor = Red;
                 repeatPassword.TextColor = Red;
-
             }
             else
             {
@@ -31,7 +30,6 @@ namespace Biblioteca
                 //await SaveUserAsync(usr);
                 using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
                 {
-
                     //int userAdded = conn.Insert(usr);
                     database.SaveUserAsync(usr);
                 }
@@ -39,7 +37,6 @@ namespace Biblioteca
             }
 
         }
-
 
         public Register()
         {

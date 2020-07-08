@@ -9,7 +9,9 @@
             </ListView>
             <Label
                 x:Name="sortTitle"
-                Text="Ordenar por título" HorizontalOptions="Start" VerticalOptions="Start"
+                Text="Ordenar por título"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
                 
                 />
             <Button
