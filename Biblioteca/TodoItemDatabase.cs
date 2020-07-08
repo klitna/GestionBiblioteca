@@ -4,6 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using SQLite;
 
+using SQLiteNetExtensions.Attributes;
+using SQLiteNetExtensionsAsync.Extensions;
+
+
 namespace Biblioteca
 {
     public class TodoItemDatabase
@@ -13,21 +17,28 @@ namespace Biblioteca
             return new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
         });
 
-        static SQLiteAsyncConnection Database => lazyInitializer.Value;
+        public static SQLiteAsyncConnection Database => lazyInitializer.Value;
+
+        public string map { get; private set; }
+
         static bool initialized = false;
+        private string v;
         readonly SQLiteAsyncConnection _database;
 
-        public TodoItemDatabase(string dbname)
+        
+        public TodoItemDatabase(string x)
         {
+            //creating tables
             Database.CreateTableAsync<Book>();
             Database.CreateTableAsync<User>();
         }
 
-        //Guardar usuario
+        //creating new user inside the databse (not sure whether it is working)
         public Task<int> SaveUserAsync(User usr)
         {
             if (usr.Username != null)
             {
+
                 return _database.UpdateAsync(usr);
             }
             else
@@ -36,17 +47,19 @@ namespace Biblioteca
             }
         }
 
-        //Devolver la lista de libros
+
+        //Returning the booklist (never used yet)
         public Task<List<Book>> GetBooksAsync()
         {
             return _database.Table<Book>().ToListAsync();
+
         }
 
-
-        /*public Task<string>GetUsernameAsync()
+        //Saving book into database (not sure if it's working)
+        public Task<List<User>>GetUserAsync()
         {
             return _database.Table<User>().ToListAsync();
-        }*/
+        }
 
         async Task InitializeAsync()
         {
@@ -60,7 +73,15 @@ namespace Biblioteca
             }
         }
 
-        //...
+        //Saving books into database (working fine)
+        public Task SaveBooks(List<Book> b)
+        {
+            return _database.InsertOrReplaceAllWithChildrenAsync(b);
+            
+        }
+
+
+
     }
 }
 /*

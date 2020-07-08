@@ -5,7 +5,6 @@ namespace Biblioteca
 {
     public class User
     {
-
         public User()
         {
         }

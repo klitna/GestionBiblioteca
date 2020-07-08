@@ -1,5 +1,6 @@
 ﻿using System;
 using SQLite;
+using SQLiteNetExtensions.Attributes;
 
 namespace Biblioteca
 {
@@ -10,7 +11,7 @@ namespace Biblioteca
             Title = "Unknown";
             Author = "Unknown";
             Genre = "Unknown";
-            Availiable = false;
+            Availiable = true;
             Code = 0;
         }
 
@@ -22,6 +23,9 @@ namespace Biblioteca
         public string Author { set; get; }
         public string Genre { set; get; }
         public bool Availiable { set; get; }
+
+        [ForeignKey(typeof(User))]
+        public string Username { get; set; }
     
     }
 }
