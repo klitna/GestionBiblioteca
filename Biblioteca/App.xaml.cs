@@ -6,16 +6,16 @@ namespace Biblioteca
 {
     public partial class App : Application
     {
-        static TodoItemDatabase database;
+        static AppDatabase database;
         public static string FilePath;
 
-        public static TodoItemDatabase Database
+        public static AppDatabase Database
         {
             get
             {
                 if (database == null)
                 {
-                    database = new TodoItemDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Notes.db3"));
+                    database = new AppDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Notes.db3"));
                 }
                 return database;
             }

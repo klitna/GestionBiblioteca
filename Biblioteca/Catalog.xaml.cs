@@ -15,9 +15,6 @@ namespace Biblioteca{
         List<User> user = new List<User>();
         System.Threading.Tasks.Task<List<Book>> bookAux;
 
-        /*list.Add(new Student("bob"));
-        list.Add(new Student("joe"));
-        Student joe = list[1];*/
         List<Book> b = new List<Book>();
         
         /*protected override void OnAppearing()
@@ -58,26 +55,23 @@ namespace Biblioteca{
             Console.WriteLine("Av: "+b[index+1].Availiable);
             DisplayAlert("Index: ", Convert.ToString(index), "OK");
             BookList.ItemsSource = PrintList(b, BOOKS_AMOUNT);
-
         }
 
         void TappedSortName(object sender, EventArgs args)
         {
-            var database = new TodoItemDatabase("");
+            var database = new AppDatabase("");
             DisplayAlert("Sorted ", " books ", " by name");
-
-
         }
 
         public Catalog()
         {
             InitializeComponent();
 
-            var database = new TodoItemDatabase("");
+            var database = new AppDatabase("");
 
             string title = "Guerra y paz"; string author = "L. Tolstoy"; string genre = "Drama"; int index = 0;
             b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
-            title = "De la Tierra a la Luna"; author = "J.Verne"; genre = "Aventura"; index = 1;
+            title = "De la Tierra a la Luna"; author = "J.Verne"; genre = "Aventura"; index++;
             b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
             title = "Colección de Cuentos"; author = "A.Chekhov"; genre = "Humor"; index++;
             b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
@@ -103,7 +97,7 @@ namespace Biblioteca{
             b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
             title = "Faust"; author = "Ghoete"; genre = "Tragedia"; index++;
             b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
-            title = "Pobres Gentes"; author = "F. Dostoyevsky"; genre = "Drama"; index++;
+            title = "Un héroe de nuestro tiempo"; author = "M. Lermontov"; genre = "Drama"; index++;
             b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
             title = "1984"; author = "G. Orwell"; genre = "Ciencia ficción"; index++;
             b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
@@ -118,27 +112,28 @@ namespace Biblioteca{
 
             BorrowBookButton.Command = BorrowBookCommand;
             Book x = (Book)BookList.SelectedItem;
-            try
-            {
-                var bookList = database.GetBooksAsync();
-                b=new List<Book>();
-                bookAux = bookList;
-                //b=bookAux
-                //bookAux.ToListAsync();
-            }
-            catch(Exception e)
-            {
-                Console.Write("2eXCEPTION!!!!" + e);
-            }
-            
+            GetBooksFromDatabase();
             database.SaveBooks(b);
             BookList.ItemsSource = PrintList(b, BOOKS_AMOUNT);
 
+            Console.Write("TEST: " + b[2].Title + " state: " + b[2].Availiable);
+            DisplayAlert("TEST: ", b[2].Title, " state: " + b[2].Availiable);
         }
-        
+
         //BookList.ItemsSource = Books.Select((item) => new ItemWrapper()
-
-
-
+        async public void GetBooksFromDatabase()
+        {
+            var database = new AppDatabase("");
+            try
+            {
+                var bookList = await database.GetBooksAsync();
+                bookList[2].Title="PEPITOPEPITOPEPITOPEPITO";
+                b = bookList;
+            }
+            catch (Exception e)
+            {
+                Console.Write("2eXCEPTION!!!!" + e);
+            }
+        }
     }
 }

@@ -12,10 +12,10 @@ namespace Biblioteca
 
         public Color Red { get; private set; }
 
-        public void RegisterAsync()
+        async public void RegisterAsync()
         {
-            var database = new TodoItemDatabase("");
-            var userTaskList = database.GetUserAsync();
+            var database = new AppDatabase("");
+            var userTaskList = await database.GetUserAsync();
             List<User> userList;
             bool userFound=false;
 
@@ -30,15 +30,15 @@ namespace Biblioteca
                 usr.Username = newUsername.Text;
                 usr.Password = newPassword.Text;
 
-                for(int i=0; i<usr.Id; i++)
+                for(int i=0; i<usr.Id&!userFound; i++)
                 {
-                    //if (userTaskList[i].Username == newUsername.Text)
-                       // userFound = true;
+                    if (userTaskList[i].Username == newUsername.Text)
+                        userFound = true;
                 }
                 //await SaveUserAsync(usr);
                 //int userAdded = conn.Insert(usr);
                 if(!userFound)
-                    database.SaveUserAsync(usr);
+                    await database.SaveUserAsync(usr);
             }
 
         }
@@ -46,7 +46,6 @@ namespace Biblioteca
         public Register()
         {
             InitializeComponent();
-            
             Guardar.Command = RegisterCommand;
         }
     }

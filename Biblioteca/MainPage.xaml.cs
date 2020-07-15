@@ -19,38 +19,45 @@ namespace Biblioteca
             //Menu=Navigation.
         }
 
-        void btnLogIn_Clicked(System.Object sender, System.EventArgs e)
+        async void btnLogIn_Clicked(System.Object sender, System.EventArgs e)
         {
-            var database = new TodoItemDatabase("");
+            bool foundUser = false;
+            var database = new AppDatabase("");
             try
             { 
-                var userList = database.GetUserAsync();
-
+                var userList = await database.GetUserAsync();
+                for(int i=0; i<userList.Count&&!foundUser; i++)
+                {
+                    if(userList[i].Username==entryName.Text)
+                        foundUser=true;
+                }
                 Console.Write(userList);
                 string username = entryName.Text;
                 string password = entryPass.Text;
-                Navigation.PushAsync(new Menu()); 
+                await Navigation.PushAsync(new Menu()); 
             }
             catch (Exception)
             {
                 Console.Write("login gone wrong!!!");
             }
-            if (entryName.Text != null && entryPass.Text != null)
+            if (entryName.Text != null || entryPass.Text != null)
             {
-                Navigation.PushAsync(new Menu());
+                await Navigation.PushAsync(new Menu());
 
             }
             else
+            {
                 if (entryName.Text == null)
                 {
                     entryName.Text = "Campo vacío!";
                     entryName.TextColor = Color.Red;
                 }
-                else
+                if (entryPass.Text == null)
                 {
                     entryPass.Text = "Campo vacío!";
                     entryPass.TextColor = Color.Red;
                 }
+            }
 
 
         }

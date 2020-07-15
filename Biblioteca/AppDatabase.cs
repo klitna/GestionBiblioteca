@@ -10,7 +10,7 @@ using SQLiteNetExtensionsAsync.Extensions;
 
 namespace Biblioteca
 {
-    public class TodoItemDatabase
+    public class AppDatabase
     {
         static readonly Lazy<SQLiteAsyncConnection> lazyInitializer = new Lazy<SQLiteAsyncConnection>(() =>
         {
@@ -24,8 +24,8 @@ namespace Biblioteca
         static bool initialized = false;
         readonly SQLiteAsyncConnection _database;
 
-        
-        public TodoItemDatabase(string x)
+
+        public AppDatabase(string x)
         {
             //creating tables
             Database.CreateTableAsync<Book>();
@@ -37,7 +37,6 @@ namespace Biblioteca
         {
             if (usr.Username != null)
             {
-
                 return _database.UpdateAsync(usr);
             }
             else
@@ -45,7 +44,7 @@ namespace Biblioteca
                 return _database.InsertAsync(usr);
             }
         }
-
+    
        /* public Task<int> SaveBook()
         {
             orderby student.Last ascending, student.First ascending
