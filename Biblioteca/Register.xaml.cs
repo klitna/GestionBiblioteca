@@ -15,7 +15,9 @@ namespace Biblioteca
         public void RegisterAsync()
         {
             var database = new TodoItemDatabase("");
-            var userList = database.GetUserAsync();
+            var userTaskList = database.GetUserAsync();
+            List<User> userList;
+            bool userFound=false;
 
             if (newPassword.Text != repeatPassword.Text)
             {
@@ -27,13 +29,16 @@ namespace Biblioteca
                 User usr = new User();
                 usr.Username = newUsername.Text;
                 usr.Password = newPassword.Text;
-                //await SaveUserAsync(usr);
-                using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
-                {
-                    //int userAdded = conn.Insert(usr);
-                    database.SaveUserAsync(usr);
-                }
 
+                for(int i=0; i<usr.Id; i++)
+                {
+                    //if (userTaskList[i].Username == newUsername.Text)
+                       // userFound = true;
+                }
+                //await SaveUserAsync(usr);
+                //int userAdded = conn.Insert(usr);
+                if(!userFound)
+                    database.SaveUserAsync(usr);
             }
 
         }

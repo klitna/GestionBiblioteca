@@ -5,14 +5,16 @@ namespace Biblioteca
 {
     public class User
     {
+
         public User()
         {
         }
 
-        [PrimaryKey]
+        [PrimaryKey, AutoIncrement]
+        public int Id { set; get;  }
         public string Username { set; get; }
         public string Password { set; get; }
         [OneToMany]
-        public Book[] book { set; get; }
+        public Book[] Book { set; get; }
     }
 }

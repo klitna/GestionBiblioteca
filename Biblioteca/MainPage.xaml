@@ -3,12 +3,9 @@
     <StackLayout BackgroundColor="#FAFBFF">
        
          <Image Source="book.png"
-                
-                
                 Scale="0.4" VerticalOptions="Start"
-               
-
                />
+
         <Label
             TextColor="Black"
             Text="Gestión Biblioteca"
@@ -17,16 +14,14 @@
             Scale="1.5" HorizontalTextAlignment="Center" LineHeight="-1" VerticalTextAlignment="Center"
             VerticalOptions="Center"
             HorizontalOptions="Center" Margin="0,-71,0,34"
-
-
-
                />
+
         <Entry
             x:Name="entryName"
             Placeholder="Username"
             Grid.Column="1" Margin="20,0"
-
             />
+
         <Entry
             x:Name="entryPass"
             Placeholder="Password" Margin="20,0"
@@ -43,13 +38,11 @@
                 AutomationProperties.IsInAccessibleTree="False"
                 BorderColor="#FFFFFF" Margin="60,0"
                 />
+
         <Label x:Name="createAccount"
                Text="Crear nuevo usuario"
                HorizontalOptions="Center"
-               <Label.GestureRecognizers>
-        <TapGestureRecognizer Command="{Binding MyCommand}" NumberOfTapsRequired="1" />
-      </Label.GestureRecognizers>
-
-    </StackLayout>
+               />
+        </StackLayout>
 </ContentPage>
 

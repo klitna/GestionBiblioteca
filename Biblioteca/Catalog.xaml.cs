@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using SQLite;
 using Xamarin.Forms;
 
@@ -12,6 +13,8 @@ namespace Biblioteca{
         ObservableCollection<string> Books { get; set; }
         const int BOOKS_AMOUNT = 20;
         List<User> user = new List<User>();
+        System.Threading.Tasks.Task<List<Book>> bookAux;
+
         /*list.Add(new Student("bob"));
         list.Add(new Student("joe"));
         Student joe = list[1];*/
@@ -58,82 +61,84 @@ namespace Biblioteca{
 
         }
 
+        void TappedSortName(object sender, EventArgs args)
+        {
+            var database = new TodoItemDatabase("");
+            DisplayAlert("Sorted ", " books ", " by name");
+
+
+        }
+
         public Catalog()
         {
             InitializeComponent();
-             
+
+            var database = new TodoItemDatabase("");
+
+            string title = "Guerra y paz"; string author = "L. Tolstoy"; string genre = "Drama"; int index = 0;
+            b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
+            title = "De la Tierra a la Luna"; author = "J.Verne"; genre = "Aventura"; index = 1;
+            b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
+            title = "Colección de Cuentos"; author = "A.Chekhov"; genre = "Humor"; index++;
+            b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
+            title = "Faust"; author = "Ghoete"; genre = "Tragedia"; index++;
+            b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
+            title = "Pobres Gentes"; author = "F. Dostoyevsky"; genre = "Drama"; index++;
+            b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
+            title = "1984"; author = "G. Orwell"; genre = "Ciencia ficción"; index++;
+            b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
+            title = "Tres camaradas"; author = "Erich Maria Remarque"; genre = "Ficción"; index++;
+            b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
+            title = "La Rayuela"; author = "J.Cortázar"; genre = "Ficción"; index++;
+            b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
+            title = "Don Quijote de la Mancha"; author = "M. de Cervantes"; genre = "Satira"; index++;
+            b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
+            title = "Sueñan los androides con ovejas eléctricas"; author = "F. Dick"; genre = "Ciencia ficción"; index++;
+            b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
+            title = "Guerra y paz"; author = "L. Tolstoy"; genre = "Drama"; index = 0;
+            b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
+            title = "De la Tierra a la Luna"; author = "J.Verne"; genre = "Aventura"; index = 1;
+            b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
+            title = "Colección de Cuentos"; author = "A.Chekhov"; genre = "Humor"; index++;
+            b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
+            title = "Faust"; author = "Ghoete"; genre = "Tragedia"; index++;
+            b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
+            title = "Pobres Gentes"; author = "F. Dostoyevsky"; genre = "Drama"; index++;
+            b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
+            title = "1984"; author = "G. Orwell"; genre = "Ciencia ficción"; index++;
+            b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
+            title = "Tres camaradas"; author = "Erich Maria Remarque"; genre = "Ficción"; index++;
+            b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
+            title = "La Rayuela"; author = "J.Cortázar"; genre = "Ficción"; index++;
+            b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
+            title = "Don Quijote de la Mancha"; author = "M. de Cervantes"; genre = "Satira"; index++;
+            b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
+            title = "Sueñan los androides con ovejas eléctricas"; author = "F. Dick"; genre = "Ciencia ficción"; index++;
+            b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
+
             BorrowBookButton.Command = BorrowBookCommand;
             Book x = (Book)BookList.SelectedItem;
-            var database = new TodoItemDatabase("");
-            var bookList=database.GetBooksAsync();
-            if (bookList == null){
-                string title = "Guerra y paz"; string author = "L. Tolstoy"; string genre = "Drama"; int index = 0;
-                b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
-                title = "De la Tierra a la Luna"; author = "J.Verne"; genre = "Aventura"; index = 1;
-                b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
-                title = "Colección de Cuentos"; author = "A.Chekhov"; genre = "Humor"; index++;
-                b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
-                title = "Faust"; author = "Ghoete"; genre = "Tragedia"; index++;
-                b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
-                title = "Pobres Gentes"; author = "F. Dostoyevsky"; genre = "Drama"; index++;
-                b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
-                title = "1984"; author = "G. Orwell"; genre = "Ciencia ficción"; index++;
-                b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
-                title = "Tres camaradas"; author = "Erich Maria Remarque"; genre = "Ficción"; index++;
-                b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
-                title = "La Rayuela"; author = "J.Cortázar"; genre = "Ficción"; index++;
-                b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
-                title = "Don Quijote de la Mancha"; author = "M. de Cervantes"; genre = "Satira"; index++;
-                b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
-                title = "Sueñan los androides con ovejas eléctricas"; author = "F. Dick"; genre = "Ciencia ficción"; index++;
-                b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
-                title = "Guerra y paz"; author = "L. Tolstoy"; genre = "Drama"; index = 0;
-                b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
-                title = "De la Tierra a la Luna"; author = "J.Verne"; genre = "Aventura"; index = 1;
-                b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
-                title = "Colección de Cuentos"; author = "A.Chekhov"; genre = "Humor"; index++;
-                b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
-                title = "Faust"; author = "Ghoete"; genre = "Tragedia"; index++;
-                b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
-                title = "Pobres Gentes"; author = "F. Dostoyevsky"; genre = "Drama"; index++;
-                b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
-                title = "1984"; author = "G. Orwell"; genre = "Ciencia ficción"; index++;
-                b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
-                title = "Tres camaradas"; author = "Erich Maria Remarque"; genre = "Ficción"; index++;
-                b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
-                title = "La Rayuela"; author = "J.Cortázar"; genre = "Ficción"; index++;
-                b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
-                title = "Don Quijote de la Mancha"; author = "M. de Cervantes"; genre = "Satira"; index++;
-                b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
-                title = "Sueñan los androides con ovejas eléctricas"; author = "F. Dick"; genre = "Ciencia ficción"; index++;
-                b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
-                database.SaveBooks(b);
+            try
+            {
+                var bookList = database.GetBooksAsync();
+                b=new List<Book>();
+                bookAux = bookList;
+                //b=bookAux
+                //bookAux.ToListAsync();
             }
-                /* b[0] = new Book("Guerra y Paz", "L. Tolstoy", "Drama", 0);
-             b[1] = new Book("De la Tierra a la Luna", "J. Verne", "Aventura", 1);
-             b[2] = new Book("Colección de Cuentos", "A. Chekhov", "Humor", 2);
-             b[3] = new Book("Faust", "Ghoete", "Tragedia", 3);
-             b[4] = new Book("Pobres Gentes", "F. Dostoyevsky", "Drama", 4);
-             b[5] = new Book("1984", "G. Orwell", "Ciencia ficción", 5);
-             b[6] = new Book("Tres camaradas", "Erich Maria Remarque", "Ficción", 6);
-             b[7] = new Book("La Rayuela", "J. Cortázar", "Ficción", 7);
-             b[8] = new Book("Don Quijote de la Mancha", "M. de Cervantes", "Satira", 8);
-             b[9] = new Book("Sueñan los androides con ovejas eléctricas", "F. Dick", "Ciencia ficción", 9);
-             b[10] = new Book("Guerra y Paz", "L. Tolstoy", "Drama",10);
-             b[11] = new Book("De la Tierra a la Luna", "J. Verne", "Aventura",11);
-             b[12] = new Book("Colección de Cuentos", "A. Chekhov", "Humor",12);
-             b[13] = new Book("Faust", "Ghoete", "Tragedia",13);
-             b[14] = new Book("Pobres Gentes", "F. Dostoyevsky", "Drama",14);
-             b[15] = new Book("1984", "G. Orwell", "Ciencia ficción",15);
-             b[16] = new Book("Tres camaradas", "Erich Maria Remarque", "Ficción",16);
-             b[17] = new Book("La Rayuela", "J. Cortázar", "Ficción",17);
-             b[18] = new Book("Don Quijote de la Mancha", "M. de Cervantes", "Satira",18);
-             b[19] = new Book("Sueñan los androides con ovejas eléctricas", "F. Dick", "Ciencia ficción",19);
-            */
-            //BookList.ItemsSource = Books.Select((item) => new ItemWrapper()
-
+            catch(Exception e)
+            {
+                Console.Write("2eXCEPTION!!!!" + e);
+            }
+            
+            database.SaveBooks(b);
             BookList.ItemsSource = PrintList(b, BOOKS_AMOUNT);
 
         }
+        
+        //BookList.ItemsSource = Books.Select((item) => new ItemWrapper()
+
+
+
     }
 }

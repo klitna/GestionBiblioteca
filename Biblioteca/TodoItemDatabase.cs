@@ -22,7 +22,6 @@ namespace Biblioteca
         public string map { get; private set; }
 
         static bool initialized = false;
-        private string v;
         readonly SQLiteAsyncConnection _database;
 
         
@@ -47,15 +46,19 @@ namespace Biblioteca
             }
         }
 
+       /* public Task<int> SaveBook()
+        {
+            orderby student.Last ascending, student.First ascending
 
-        //Returning the booklist (never used yet)
+        }*/
+
+        //Returning the booklist 
         public Task<List<Book>> GetBooksAsync()
         {
             return _database.Table<Book>().ToListAsync();
-
         }
 
-        //Saving book into database (not sure if it's working)
+        //Returning a list of all the users
         public Task<List<User>>GetUserAsync()
         {
             return _database.Table<User>().ToListAsync();
