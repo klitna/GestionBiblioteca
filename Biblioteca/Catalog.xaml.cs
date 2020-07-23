@@ -112,8 +112,8 @@ namespace Biblioteca{
 
             BorrowBookButton.Command = BorrowBookCommand;
             Book x = (Book)BookList.SelectedItem;
-            GetBooksFromDatabase();
-            database.SaveBooks(b);
+            //GetBooksFromDatabase();
+            //database.SaveBooks(b);
             BookList.ItemsSource = PrintList(b, BOOKS_AMOUNT);
 
             Console.Write("TEST: " + b[2].Title + " state: " + b[2].Availiable);
@@ -124,14 +124,18 @@ namespace Biblioteca{
         async public void GetBooksFromDatabase()
         {
             var database = new AppDatabase("");
+            await database.SaveBooks(b);
+            List <Book>test = new List<Book>();
+            test = await database.GetBooksAsync();
             try
             {
                 var bookList = await database.GetBooksAsync();
-                bookList[2].Title="PEPITOPEPITOPEPITOPEPITO";
+                bookList[2].Title="TESTTITLE";
                 b = bookList;
             }
             catch (Exception e)
             {
+                await database.SaveBooks(b);
                 Console.Write("2eXCEPTION!!!!" + e);
             }
         }

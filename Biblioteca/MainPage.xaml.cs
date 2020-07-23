@@ -13,6 +13,8 @@ namespace Biblioteca
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+      //  public Action<Xamarin.Forms.View, object> Register_Clicked { get; set; } = new Action
+
         public MainPage()
         {
             InitializeComponent();
@@ -62,5 +64,13 @@ namespace Biblioteca
 
         }
 
+        async public void RegisterClicked(System.Object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new Register());
+        }
+
+        void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
+        {
+        }
     }
 }

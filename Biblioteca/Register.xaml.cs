@@ -7,16 +7,27 @@ namespace Biblioteca
     public partial class Register : ContentPage
 
     {
-
+        public static readonly BindableProperty EventNameProperty =
+        BindableProperty.Create("EventName", typeof(string), typeof(MainPage), null);
         public System.Windows.Input.ICommand RegisterCommand => new Command(RegisterAsync);
-
+        List<User> userList;
         public Color Red { get; private set; }
 
         async public void RegisterAsync()
         {
             var database = new AppDatabase("");
-            var userTaskList = await database.GetUserAsync();
-            List<User> userList;
+            try
+            { 
+                userList = await database.GetUserAsync();
+            }
+            catch
+            {
+                List<User> user = new List<User>();
+                userList = new List<User>();
+                await database.SaveUserAsync(userList);
+
+            }
+           
             bool userFound=false;
 
             if (newPassword.Text != repeatPassword.Text)
@@ -30,15 +41,18 @@ namespace Biblioteca
                 usr.Username = newUsername.Text;
                 usr.Password = newPassword.Text;
 
-                for(int i=0; i<usr.Id&!userFound; i++)
+                for(int i=0; i<userList.Count&!userFound; i++)
                 {
-                    if (userTaskList[i].Username == newUsername.Text)
+                    if (userList[i].Username == newUsername.Text)
                         userFound = true;
                 }
                 //await SaveUserAsync(usr);
                 //int userAdded = conn.Insert(usr);
                 if(!userFound)
-                    await database.SaveUserAsync(usr);
+                {
+                    userList.Add(new User() { Username = newUsername.Text, Password = newPassword.Text, Id=userList.Count });
+                    await database.SaveUserAsync(userList);
+                }
             }
 
         }

@@ -3,7 +3,8 @@
     <StackLayout BackgroundColor="#FAFBFF">
        
          <Image Source="book.png"
-                Scale="0.4" VerticalOptions="Start"
+                Scale="0.3" VerticalOptions="Start"
+                HorizontalOptions="Start"
                />
 
         <Label
@@ -41,8 +42,12 @@
 
         <Label x:Name="createAccount"
                Text="Crear nuevo usuario"
-               HorizontalOptions="Center"
-               />
+               HorizontalOptions="Center">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="RegisterClicked"/>
+            </Label.GestureRecognizers>
+            </Label>
+               
         </StackLayout>
 </ContentPage>
 

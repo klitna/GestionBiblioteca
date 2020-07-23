@@ -33,23 +33,17 @@ namespace Biblioteca
         }
 
         //creating new user inside the databse (not sure whether it is working)
-        public Task<int> SaveUserAsync(User usr)
+        public Task SaveUserAsync(List<User> usr)
         {
-            if (usr.Username != null)
-            {
-                return _database.UpdateAsync(usr);
-            }
-            else
-            {
-                return _database.InsertAsync(usr);
-            }
-        }
-    
-       /* public Task<int> SaveBook()
-        {
-            orderby student.Last ascending, student.First ascending
+            return _database.InsertOrReplaceAllWithChildrenAsync(usr);
 
-        }*/
+        }
+
+        /* public Task<int> OrderBookName()
+         {
+             orderby student.Last ascending, student.First ascending
+
+         }*/
 
         //Returning the booklist 
         public Task<List<Book>> GetBooksAsync()
