@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Biblioteca.Catalog">
-    <ContentPage.Content>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Biblioteca.ViewModels" x:Class="Biblioteca.Catalog">
+    <ContentPage.BindingContext>
+
         <StackLayout>
 
             <ListView x:Name="BookList" ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}">
-     
+
 
             </ListView>
             <Label
@@ -13,11 +14,11 @@
                 HorizontalOptions="Start"
                 VerticalOptions="Start">
                 <Label.GestureRecognizers>
-                     <TapGestureRecognizer Tapped="TappedSortName" />
-                 </Label.GestureRecognizers>
-                </Label>
-             
-             <Button
+                    <TapGestureRecognizer Tapped="TappedSortName" />
+                </Label.GestureRecognizers>
+            </Label>
+
+            <Button
                 x:Name="BorrowBookButton"
                 BackgroundColor="#5E8EA8"
                 TextColor="White"
@@ -26,5 +27,5 @@
                
                 />
         </StackLayout>
-    </ContentPage.Content>
+    </ContentPage.BindingContext>
 </ContentPage>

@@ -2,34 +2,33 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Windows.Input;
+using Prism.Commands;
+using Prism.Navigation;
 using SQLite;
 using Xamarin.Forms;
-
-namespace Biblioteca{
-    public partial class Catalog : ContentPage
+namespace Biblioteca.Model
+{
+    public class CatalogViewModel
     {
-        public string SelectedBook{ get; set; }
-        public System.Windows.Input.ICommand BorrowBookCommand => new Command(BorrowBook);
-        ObservableCollection<string> Books { get; set; }
+        public Book SelectedBook { get; set; }
+        //public System.Windows.Input.ICommand BorrowBookCommand => new Command(BorrowBook);
+        public ICommand RegisterCommand => new DelegateCommand<Book>(BorrowBook);
+
+        ObservableCollection<Book> Books { get; set; }
         const int BOOKS_AMOUNT = 20;
         List<User> user = new List<User>();
         System.Threading.Tasks.Task<List<Book>> bookAux;
 
-        List<Book> b = new List<Book>();
-        
-        /*protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
-            {
-                conn.CreateTable<User>();
-                var bookBd = conn.Table<User>().ToList();
-            }
-        }*/
+        AppDatabase database = new AppDatabase();
 
-        public ObservableCollection<string> PrintList(List<Book> b, int size)
+        List<Book> b = new List<Book>();
+
+        
+
+        public ObservableCollection<Book> PrintList(List<Book> b, int size)
         {
-            Books = new ObservableCollection<string>();
+            Books = new ObservableCollection<Book>();
             string avail;
             for (int i = 0; i < size; i++)
             {
@@ -38,37 +37,35 @@ namespace Biblioteca{
                 else
                     avail = "No disponible";
 
-                Books.Add(b[i].Title + "\t - \t" + b[i].Author + "\t - \t" + b[i].Genre+"\t - \t "+avail);
+                //Books.Add(b[i].Title + "\t - \t" + b[i].Author + "\t - \t" + b[i].Genre + "\t - \t " + avail);
+                Books.Add(b[i]);
             }
             return Books;
         }
-        
 
-        public void BorrowBook()
+
+        public void BorrowBook(Book b_aux)
         {
-            BookList.SelectedItem = SelectedBook;
-            //(Book)BookList.SelectedItem
+            //BookList.SelectedItem = SelectedBook;
+            //Books.SelectedItem
             //int index = Books.IndexOf(SelectedBook);
-            int index = Books.IndexOf(SelectedBook);
+
+            int index = Books.IndexOf(b_aux);
             Console.Write("index: " + index);
             b[0].Availiable = false;
-            Console.WriteLine("Av: "+b[index+1].Availiable);
-            DisplayAlert("Index: ", Convert.ToString(index), "OK");
-            BookList.ItemsSource = PrintList(b, BOOKS_AMOUNT);
+            Console.WriteLine("Av: " + b[index + 1].Availiable);
+
+            //DisplayAlert("Index: ", Convert.ToString(index), "OK");
+            //BookList.ItemsSource = PrintList(b, BOOKS_AMOUNT);
         }
 
         void TappedSortName(object sender, EventArgs args)
         {
-            var database = new AppDatabase("");
-            DisplayAlert("Sorted ", " books ", " by name");
+         //   DisplayAlert("Sorted ", " books ", " by name");
         }
 
-        public Catalog()
+        public CatalogViewModel(INavigationService navigationService)
         {
-            InitializeComponent();
-
-            var database = new AppDatabase("");
-
             string title = "Guerra y paz"; string author = "L. Tolstoy"; string genre = "Drama"; int index = 0;
             b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
             title = "De la Tierra a la Luna"; author = "J.Verne"; genre = "Aventura"; index++;
@@ -110,34 +107,38 @@ namespace Biblioteca{
             title = "Sueñan los androides con ovejas eléctricas"; author = "F. Dick"; genre = "Ciencia ficción"; index++;
             b.Add(new Book() { Title = title, Author = author, Genre = genre, Code = index });
 
-            BorrowBookButton.Command = BorrowBookCommand;
-            Book x = (Book)BookList.SelectedItem;
-            //GetBooksFromDatabase();
+            //BorrowBookButton.Command = BorrowBookCommand;
+            //Book x = (Book)BookList.SelectedItem;
+            GetBooksFromDatabase();
             //database.SaveBooks(b);
-            BookList.ItemsSource = PrintList(b, BOOKS_AMOUNT);
-
+            //BookList.ItemsSource = PrintList(b, BOOKS_AMOUNT);
             Console.Write("TEST: " + b[2].Title + " state: " + b[2].Availiable);
-            DisplayAlert("TEST: ", b[2].Title, " state: " + b[2].Availiable);
+            //DisplayAlert("TEST: ", b[2].Title, " state: " + b[2].Availiable);
         }
 
         //BookList.ItemsSource = Books.Select((item) => new ItemWrapper()
         async public void GetBooksFromDatabase()
         {
-            var database = new AppDatabase("");
-            await database.SaveBooks(b);
-            List <Book>test = new List<Book>();
-            test = await database.GetBooksAsync();
+            //b[1].Title = "TESTETSTETSTE";
+            for (int i = 0; i < b.Count; i++)
+                await database.SaveBookAsync(b[i]);
+            List<Book> test = new List<Book>();
+
             try
             {
                 var bookList = await database.GetBooksAsync();
-                bookList[2].Title="TESTTITLE";
+                bookList[2].Title = "TESTTITLE";
                 b = bookList;
             }
             catch (Exception e)
             {
-                await database.SaveBooks(b);
+                for (int i = 0; i < b.Count; i++)
+                    await database.SaveBookAsync(b[i]);
                 Console.Write("2eXCEPTION!!!!" + e);
             }
+
+            test = await database.GetBooksAsync();
+            //DisplayAlert("TEST RESULT: ", test[2].Title, " state: " + b[2].Availiable);
         }
     }
 }

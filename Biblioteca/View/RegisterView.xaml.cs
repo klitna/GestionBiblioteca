@@ -1,21 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using Biblioteca.ViewModels;
+using Prism.Navigation;
 using Xamarin.Forms;
 
 namespace Biblioteca
 {
-    public partial class Register : ContentPage
+    public partial class RegisterView : ContentPage
 
     {
-        public static readonly BindableProperty EventNameProperty =
-        BindableProperty.Create("EventName", typeof(string), typeof(MainPage), null);
-        public System.Windows.Input.ICommand RegisterCommand => new Command(RegisterAsync);
-        List<User> userList;
-        public Color Red { get; private set; }
+        
 
-        async public void RegisterAsync()
+        /*async public void RegisterAsync()
         {
-            var database = new AppDatabase("");
+            var database = new AppDatabase();
             try
             { 
                 userList = await database.GetUserAsync();
@@ -56,11 +54,13 @@ namespace Biblioteca
             }
 
         }
-
-        public Register()
+        */
+        public RegisterView(INavigationService navigationService)
         {
-            InitializeComponent();
-            Guardar.Command = RegisterCommand;
+            //InitializeComponent();
+            //Guardar.Command = RegisterCommand;
+            BindingContext = new RegisterViewModel(navigationService);
+
         }
     }
 }

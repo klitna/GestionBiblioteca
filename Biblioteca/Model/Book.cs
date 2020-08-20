@@ -26,6 +26,5 @@ namespace Biblioteca
 
         [ForeignKey(typeof(User))]
         public string Username { get; set; }
-    
     }
 }

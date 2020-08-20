@@ -1,21 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
+using Android.Content.Res;
+using Prism.Navigation;
 
-using Xamarin.Forms;
-
-namespace Biblioteca
+namespace Biblioteca.Model
 {
-    public partial class Menu : ContentPage
+    public class MenuViewModel
     {
-        public Menu()
+        public MenuViewModel(INavigationService navigationService)
         {
-            InitializeComponent();
+
         }
 
         void BtnCatalogClicked(System.Object sender, System.EventArgs e)
         {
             Navigation.PushAsync(new Catalog());
         }
-
     }
 }

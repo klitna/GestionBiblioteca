@@ -1,32 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
+using Android.Content.Res;
+using Prism.Navigation;
 
-namespace Biblioteca
+namespace Biblioteca.Model
 {
-    // Learn more about making custom code visible in the Xamarin.Forms previewer
-    // by visiting https://aka.ms/xamarinforms-previewer
-    [DesignTimeVisible(false)]
-    public partial class MainPage : ContentPage
+    public class MainPageViewModel
     {
-      //  public Action<Xamarin.Forms.View, object> Register_Clicked { get; set; } = new Action
-
-        public MainPage()
+        INavigationService navigationService;
+        public MainPageViewModel(INavigationService navigationService)
         {
-            InitializeComponent();
-            //Menu=Navigation.
+            this.navigationService = navigationService;
         }
 
         async void btnLogIn_Clicked(System.Object sender, System.EventArgs e)
         {
             bool foundUser = false;
-            var database = new AppDatabase("");
+            var database = new AppDatabase();
+            await navigationService.NavigateAsync("MenuView");
+            /*
             try
-            { 
+            {
+
                 var userList = await database.GetUserAsync();
                 for(int i=0; i<userList.Count&&!foundUser; i++)
                 {
@@ -60,7 +54,7 @@ namespace Biblioteca
                     entryPass.TextColor = Color.Red;
                 }
             }
-
+*/
 
         }
 
@@ -72,5 +66,7 @@ namespace Biblioteca
         void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
         {
         }
+
+
     }
 }
