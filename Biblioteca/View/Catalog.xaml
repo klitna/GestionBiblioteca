@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Biblioteca.CatalogView">
+
+
+        <StackLayout>
+
+            <CollectionView x:Name="BookList" ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}">
+     
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+
+                           <Label
+                            x:Name="sortTitle"
+                            Text="Ordenar por título"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Start">
+                            <Label.GestureRecognizers>
+                                 <TapGestureRecognizer Command="{Binding RegisterCommand}" />
+                             </Label.GestureRecognizers>
+                            </Label>
+             
+                         <Button
+                            x:Name="BorrowBookButton"
+                            BackgroundColor="#5E8EA8"
+                            TextColor="White"
+                            Text="Prestar libro"
+                            Command="{Binding BorrowBookCommand}"
+                            CommandParameter="{Binding .}"
+                            />
+                        </StackLayout>
+                    </DataTemplate>
+    </CollectionView.ItemTemplate>
+            </CollectionView>
+            
+        </StackLayout>
+</ContentPage>
